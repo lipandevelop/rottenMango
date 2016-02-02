@@ -33,12 +33,12 @@
     
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
-        NSLog(@"code inside completion handler");
+        //NSLog(@"code inside completion handler");
         if (!error) {
             NSError *jsonParsingError;
             NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonParsingError];
             if (!jsonParsingError) {
-                NSLog(@"%@", jsonData);
+                //NSLog(@"%@", jsonData);
                 
                 NSMutableArray *movieDictionaryList = [[NSMutableArray alloc]init];
                 for (NSDictionary *movieDictionary in jsonData[@"movies"]) {
@@ -48,10 +48,11 @@
                     movie.year = movieDictionary[@"year"];
                     movie.mpaa_rating = movieDictionary[@"mpaa_rating"];
                     movie.runtime = movieDictionary[@"runtime"];
+                    movie.identification = movieDictionary[@"id"];
                     
                     NSDictionary *postersDictionary = movieDictionary[@"posters"];
                     NSString *path= postersDictionary[@"thumbnail"];
-                    NSLog(@"%@",path);
+                    //NSLog(@"%@",path);
                     movie.thumbnailURL = [NSData dataWithContentsOfURL: [NSURL URLWithString: path]];
                     
                     NSDictionary *ratingsDictionary = movieDictionary[@"ratings"];
@@ -59,6 +60,7 @@
                     movie.autdienceScore = ratingsDictionary[@"audience_score"];
                     movie.criticRating = ratingsDictionary[@"audience_rating"];
                     movie.audienceRating = ratingsDictionary[@"audience_rating"];
+
                     
                     NSDictionary *releaseDatesDictionary = movieDictionary[@"release_dates"];
                     movie.releasDates = releaseDatesDictionary[@"theater"];
@@ -68,10 +70,10 @@
                     [movieDictionaryList addObject:movie];
                 }
                 self.objects = movieDictionaryList;
-                NSLog(@"%lu", (unsigned long)self.objects.count);
+                //NSLog(@"%lu", (unsigned long)self.objects.count);
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    NSLog(@"inside Dispatch Handler");
+                    //NSLog(@"inside Dispatch Handler");
                     [self.tableView reloadData];
                     
                 });
@@ -81,7 +83,7 @@
         
     }];
     [dataTask resume];
-    NSLog(@"code below completion handler");
+    //NSLog(@"code below completion handler");
     
     
     // Do any additional setup after loading the view, typically from a nib.
@@ -118,7 +120,6 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         Movie *selectedMovie = self.objects[indexPath.row];
         DetailViewController *controller = (DetailViewController *)[segue destinationViewController];
-        
         controller.detailItem = selectedMovie;
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;

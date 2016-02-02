@@ -12,6 +12,7 @@
 
 @interface DetailViewController : UIViewController
 @property (strong, nonatomic) Movie *detailItem;
+@property (strong, nonatomic) MovieReview *movieReivew;
 
 @property (weak, nonatomic) IBOutlet UILabel *titleDetail;
 @property (weak, nonatomic) IBOutlet UILabel *yearDetail;
