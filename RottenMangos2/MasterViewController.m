@@ -6,6 +6,7 @@
 //  Copyright © 2016 Li Pan. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "MasterViewController.h"
 #import "DetailViewController.h"
 #import "Movie.h"
@@ -21,9 +22,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.rowHeight = 60;
+    
+#pragma data
+    
     NSURLSession *session = [NSURLSession sharedSession];
     
-    NSString *urlString = @"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?apikey=j9fhnct2tp8wu2q9h75kanh9";
+    NSString *urlString = [NSString stringWithFormat:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?apikey=%@&page_limit=50", ROTTEN_TOMATO_APIKEY];
     NSURL *url= [NSURL URLWithString:urlString];
     
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
@@ -40,16 +45,25 @@
                     Movie *movie = [[Movie alloc]init];
                     movie.title = movieDictionary[@"title"];
                     movie.synopsis = movieDictionary[@"synopsis"];
+                    movie.year = movieDictionary[@"year"];
+                    movie.mpaa_rating = movieDictionary[@"mpaa_rating"];
+                    movie.runtime = movieDictionary[@"runtime"];
                     
                     NSDictionary *postersDictionary = movieDictionary[@"posters"];
-                    
                     NSString *path= postersDictionary[@"thumbnail"];
                     NSLog(@"%@",path);
                     movie.thumbnailURL = [NSData dataWithContentsOfURL: [NSURL URLWithString: path]];
                     
+                    NSDictionary *ratingsDictionary = movieDictionary[@"ratings"];
+                    movie.criticScore = ratingsDictionary[@"critics_score"];
+                    movie.autdienceScore = ratingsDictionary[@"audience_score"];
+                    movie.criticRating = ratingsDictionary[@"audience_rating"];
+                    movie.audienceRating = ratingsDictionary[@"audience_rating"];
                     
+                    NSDictionary *releaseDatesDictionary = movieDictionary[@"release_dates"];
+                    movie.releasDates = releaseDatesDictionary[@"theater"];
                     
-                    //UIImage* image = [UIImage imageWithData: imageData];
+                    movie.reviewURL = [NSString stringWithFormat:@"http://api.rottentomatoes.com/api/public/v1.0/movies/%@/reviews.json?apikey=%@", movie.identification, ROTTEN_TOMATO_APIKEY];
                     
                     [movieDictionaryList addObject:movie];
                 }
@@ -68,12 +82,6 @@
     }];
     [dataTask resume];
     NSLog(@"code below completion handler");
-    
-    
-    
-    
-    
-    
     
     
     // Do any additional setup after loading the view, typically from a nib.
@@ -108,9 +116,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = self.objects[indexPath.row];
-        DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
-        [controller setDetailItem:object];
+        Movie *selectedMovie = self.objects[indexPath.row];
+        DetailViewController *controller = (DetailViewController *)[segue destinationViewController];
+        
+        controller.detailItem = selectedMovie;
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
@@ -134,6 +143,10 @@
     cell.descriptionLabel.text = movie.synopsis;
     cell.thumbnailImage.image = [UIImage imageWithData: movie.thumbnailURL];
     cell.thumbnailImage.contentMode = UIViewContentModeScaleAspectFit;
+    cell.critScoreLabel.text = [NSString stringWithFormat:@"%@",movie.criticScore];
+    cell.audiScoreLabel.text = [NSString stringWithFormat:@"%@",movie.autdienceScore];
+    cell.critScoreLabel.backgroundColor = [UIColor colorWithHue:movie.criticScore.intValue/270.0 saturation:1.0 brightness:1.0 alpha:0.8];
+    cell.audiScoreLabel.backgroundColor = [UIColor colorWithHue:movie.autdienceScore.intValue/270.0 saturation:1.0 brightness:1.0 alpha:0.8];
     //cell.thumbnailImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:movie.thumbnailURL]]];
 
     return cell;

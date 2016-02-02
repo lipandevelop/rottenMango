@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#define ROTTEN_TOMATO_APIKEY @"j9fhnct2tp8wu2q9h75kanh9"
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

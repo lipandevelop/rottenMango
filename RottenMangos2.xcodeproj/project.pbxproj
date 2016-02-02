@@ -16,6 +16,7 @@
 		0AEAA1DB1C5FD3C9007B8588 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AEAA1D91C5FD3C9007B8588 /* LaunchScreen.storyboard */; };
 		0AEAA1E41C5FD3D8007B8588 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AEAA1E31C5FD3D8007B8588 /* Movie.m */; };
 		0AEAA1EA1C5FDC27007B8588 /* MovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AEAA1E91C5FDC27007B8588 /* MovieCell.m */; };
+		0AEAA1ED1C602417007B8588 /* MovieReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AEAA1EC1C602417007B8588 /* MovieReview.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		0AEAA1E31C5FD3D8007B8588 /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Movie.m; path = ../Movie.m; sourceTree = "<group>"; };
 		0AEAA1E81C5FDC27007B8588 /* MovieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MovieCell.h; path = ../MovieCell.h; sourceTree = "<group>"; };
 		0AEAA1E91C5FDC27007B8588 /* MovieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MovieCell.m; path = ../MovieCell.m; sourceTree = "<group>"; };
+		0AEAA1EB1C602417007B8588 /* MovieReview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieReview.h; sourceTree = "<group>"; };
+		0AEAA1EC1C602417007B8588 /* MovieReview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieReview.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +76,8 @@
 				0AEAA1E91C5FDC27007B8588 /* MovieCell.m */,
 				0AEAA1E21C5FD3D8007B8588 /* Movie.h */,
 				0AEAA1E31C5FD3D8007B8588 /* Movie.m */,
+				0AEAA1EB1C602417007B8588 /* MovieReview.h */,
+				0AEAA1EC1C602417007B8588 /* MovieReview.m */,
 				0AEAA1CE1C5FD3C9007B8588 /* MasterViewController.h */,
 				0AEAA1CF1C5FD3C9007B8588 /* MasterViewController.m */,
 				0AEAA1D11C5FD3C9007B8588 /* DetailViewController.h */,
@@ -168,6 +173,7 @@
 				0AEAA1D01C5FD3C9007B8588 /* MasterViewController.m in Sources */,
 				0AEAA1EA1C5FDC27007B8588 /* MovieCell.m in Sources */,
 				0AEAA1E41C5FD3D8007B8588 /* Movie.m in Sources */,
+				0AEAA1ED1C602417007B8588 /* MovieReview.m in Sources */,
 				0AEAA1CA1C5FD3C9007B8588 /* main.m in Sources */,
 				0AEAA1D31C5FD3C9007B8588 /* DetailViewController.m in Sources */,
 			);

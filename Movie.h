@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface Movie : NSObject
-//@property (nonatomic, strong) NSDate *dateReleased;
+@property (nonatomic, strong) NSString *releasDates;
 @property (nonatomic, strong) NSString *identification;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *year;
@@ -27,6 +28,9 @@
 @property (nonatomic, strong) NSString *autdienceScore;
 
 @property (nonatomic, strong) NSString *synopsis;
+
+@property (nonatomic, strong) NSString *reviewURL;
+@property (nonatomic, strong) NSString *review;
 
 
 @end

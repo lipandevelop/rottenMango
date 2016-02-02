@@ -12,5 +12,7 @@
 @property (nonatomic, strong) UIImageView *thumbnailImage;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *descriptionLabel;
+@property (nonatomic, strong) UILabel *critScoreLabel;
+@property (nonatomic, strong) UILabel *audiScoreLabel;
 
 @end
